@@ -5,7 +5,7 @@ FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build-env
 WORKDIR /webapp
 
 # Copy the project files to the container
-COPY *.sln ./
+COPY *.csproj ./
 RUN dotnet restore
 
 # Copy the rest of the application code to the container
@@ -16,7 +16,7 @@ RUN dotnet publish -c Release -o out
 
 # Create the final image using the .NET Core runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:6.0
-WORKDIR /app
+WORKDIR /webapp
 COPY --from=build-env /webapp/out .
 
 # Run the application
