@@ -5,14 +5,10 @@ FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build-env
 WORKDIR /webapp
 
 # Copy the project files to the container
-COPY *.sln ./
-COPY *.csproj ./
-RUN dotnet restore
-
-# Copy the rest of the application code to the container
 COPY . ./
 
 # Build the application
+RUN dotnet restore
 RUN dotnet publish -c Release -o out
 
 # Create the final image using the .NET Core runtime image
@@ -22,4 +18,3 @@ COPY --from=build-env /webapp/out .
 
 # Run the application
 ENTRYPOINT ["dotnet", "webapp.dll", "--urls", "http://*:5000"]
-
