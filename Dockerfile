@@ -5,7 +5,7 @@ FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build-env
 WORKDIR /webapp/webapp
 
 # Copy the project files to the container
-COPY *.csproj ./
+COPY *.sln ./
 RUN dotnet restore
 
 # Copy the rest of the application code to the container
