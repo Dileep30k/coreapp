@@ -6,7 +6,7 @@ WORKDIR /webapp
 
 # Copy the project files to the container
 COPY *.sln ./
-COPY webapp/webapp/webapp.csproj ./
+COPY *.csproj ./
 RUN dotnet restore
 
 # Copy the rest of the application code to the container
